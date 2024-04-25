@@ -1,133 +1,76 @@
----
-jupyter:
-  kernelspec:
-    display_name: Python 3
-    language: python
-    name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.3
-  nbformat: 4
-  nbformat_minor: 2
----
-
-::: {.cell .markdown}
-```{=html}
 <h2 align=center>Tumor Diagnosis (Part 1): Exploratory Data Analysis</h2>
-```
-`<img src="https://storage.googleapis.com/kaggle-datasets-images/180/384/3da2510581f9d3b902307ff8d06fe327/dataset-cover.jpg">`{=html}
-:::
+<img src="https://storage.googleapis.com/kaggle-datasets-images/180/384/3da2510581f9d3b902307ff8d06fe327/dataset-cover.jpg">
 
-::: {.cell .markdown}
+
 ### About the Dataset:
-:::
 
-::: {.cell .markdown}
-The [Breast Cancer Diagnostic
-data](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
-is available on the UCI Machine Learning Repository. This database is
-also available through the [UW CS ftp
-server](http://ftp.cs.wisc.edu/math-prog/cpo-dataset/machine-learn/cancer/WDBC/).
+The [Breast Cancer Diagnostic data](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29) is available on the UCI Machine Learning Repository. This database is also available through the [UW CS ftp server](http://ftp.cs.wisc.edu/math-prog/cpo-dataset/machine-learn/cancer/WDBC/).
 
-Features are computed from a digitized image of a fine needle aspirate
-(FNA) of a breast mass. They describe characteristics of the cell nuclei
-present in the image. n the 3-dimensional space is that described in:
-\[K. P. Bennett and O. L. Mangasarian: \"Robust Linear Programming
-Discrimination of Two Linearly Inseparable Sets\", Optimization Methods
-and Software 1, 1992, 23-34\].
-:::
+Features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image. n the 3-dimensional space is that described in: [K. P. Bennett and O. L. Mangasarian: "Robust Linear Programming Discrimination of Two Linearly Inseparable Sets", Optimization Methods and Software 1, 1992, 23-34].
 
-::: {.cell .markdown}
 **Attribute Information**:
 
--   ID number
--   Diagnosis (M = malignant, B = benign) 3-32)
-:::
+- ID number
+- Diagnosis (M = malignant, B = benign) 3-32)
 
-::: {.cell .markdown}
 Ten real-valued features are computed for each cell nucleus:
 
-1.  radius (mean of distances from center to points on the perimeter)
-2.  texture (standard deviation of gray-scale values)
-3.  perimeter
-4.  area
-5.  smoothness (local variation in radius lengths)
-6.  compactness (perimeter\^2 / area - 1.0)
-7.  concavity (severity of concave portions of the contour)
-8.  concave points (number of concave portions of the contour)
-9.  symmetry
-10. fractal dimension (\"coastline approximation\" - 1)
+1. radius (mean of distances from center to points on the perimeter) 
+2. texture (standard deviation of gray-scale values) 
+3. perimeter 
+4. area 
+5. smoothness (local variation in radius lengths) 
+6. compactness (perimeter^2 / area - 1.0) 
+7. concavity (severity of concave portions of the contour) 
+8. concave points (number of concave portions of the contour)
+9. symmetry
+10. fractal dimension ("coastline approximation" - 1)
 
-The mean, standard error and \"worst\" or largest (mean of the three
-largest values) of these features were computed for each image,
-resulting in 30 features. For instance, field 3 is Mean Radius, field 13
-is Radius SE, field 23 is Worst Radius.
+The mean, standard error and "worst" or largest (mean of the three largest values) of these features were computed for each image, resulting in 30 features. For instance, field 3 is Mean Radius, field 13 is Radius SE, field 23 is Worst Radius.
 
 All feature values are recoded with four significant digits.
 
 Missing attribute values: none
 
 Class distribution: 357 benign, 212 malignant
-:::
 
-::: {.cell .markdown}
 ### Task 1: Loading Libraries and Data
-:::
 
-::: {.cell .code execution_count="3"}
-``` python
+
+```python
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import seaborn as sns  # data visualization library  
 import matplotlib.pyplot as plt
 import time
 ```
-:::
 
-::: {.cell .code execution_count="5"}
-``` python
+
+```python
 data = pd.read_csv('data/data.csv')
 ```
-:::
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
-```{=html}
 <h2 align=center> Exploratory Data Analysis </h2>
-```
 
-------------------------------------------------------------------------
-:::
+---
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
 ### Task 2: Separate Target from Features
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="6"}
-``` python
+```python
 data.head()
 ```
 
-::: {.output .execute_result execution_count="6"}
-```{=html}
+
+
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -294,17 +237,15 @@ data.head()
 </table>
 <p>5 rows × 33 columns</p>
 </div>
-```
-:::
-:::
 
-::: {.cell .code execution_count="7"}
-``` python
+
+
+
+```python
 col = data.columns
 print (col)
 ```
 
-::: {.output .stream .stdout}
     Index(['id', 'diagnosis', 'radius_mean', 'texture_mean', 'perimeter_mean',
            'area_mean', 'smoothness_mean', 'compactness_mean', 'concavity_mean',
            'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean',
@@ -315,19 +256,19 @@ print (col)
            'compactness_worst', 'concavity_worst', 'concave points_worst',
            'symmetry_worst', 'fractal_dimension_worst', 'Unnamed: 32'],
           dtype='object')
-:::
-:::
+    
 
-::: {.cell .code execution_count="10"}
-``` python
+
+```python
 y = data.diagnosis
 drop_cols = ['Unnamed: 32','id','diagnosis']
 x = data.drop(drop_cols, axis = 1)
 x.head()
 ```
 
-::: {.output .execute_result execution_count="10"}
-```{=html}
+
+
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -494,48 +435,42 @@ x.head()
 </table>
 <p>5 rows × 30 columns</p>
 </div>
-```
-:::
-:::
 
-::: {.cell .markdown}
-:::
 
-::: {.cell .markdown}
+
+ 
+
 ### Task 3: Plot Diagnosis Distributions
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="12"}
-``` python
+```python
 ax = sns.countplot(y, label = "Count")
 B, M = y.value_counts()
 print('Number of Benign Trumors', B)
 print('Number of Malignant Tumors', M)
 ```
 
-::: {.output .stream .stdout}
     Number of Benign Trumors 357
     Number of Malignant Tumors 212
-:::
+    
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/7eaaa365ca9c5abe9b3219fa76922aadf8a89ae1.png)
-:::
-:::
 
-::: {.cell .code execution_count="13"}
-``` python
+    
+![png](output_17_1.png)
+    
+
+
+
+```python
 x.describe()
 ```
 
-::: {.output .execute_result execution_count="13"}
-```{=html}
+
+
+
 <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -774,36 +709,24 @@ x.describe()
 </table>
 <p>8 rows × 30 columns</p>
 </div>
-```
-:::
-:::
 
-::: {.cell .markdown}
-:::
 
-::: {.cell .markdown}
-```{=html}
+
+ 
+
 <h2 align=center> Data Visualization </h2>
-```
 
-------------------------------------------------------------------------
-:::
+---
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
 ### Task 4: Visualizing Standardized Data with Seaborn
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="17"}
-``` python
+```python
 data = x
 data_std = (data - data.mean())/data.std()
 data = pd.concat([y, data_std.iloc[:, 0:10]], axis = 1)
@@ -813,31 +736,26 @@ sns.violinplot(x='features',y='value',hue='diagnosis', data= data, split=True, i
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/27989ebc7ca71487c7e2cdc82aec86460c8eabd5.png)
-:::
-:::
 
-::: {.cell .code}
-``` python
+    
+![png](output_23_0.png)
+    
+
+
+
+```python
+
 ```
-:::
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
 ### Task 5: Violin Plots and Box Plots
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="18"}
-``` python
+```python
 data = x
 data_std = (data - data.mean())/data.std()
 data = pd.concat([y, data_std.iloc[:, 10:20]], axis = 1)
@@ -847,13 +765,14 @@ sns.violinplot(x='features',y='value',hue='diagnosis', data= data, split=True, i
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/b363237c43d7103547c91523b253dae29796830e.png)
-:::
-:::
 
-::: {.cell .code execution_count="19"}
-``` python
+    
+![png](output_27_0.png)
+    
+
+
+
+```python
 data = x
 data_std = (data - data.mean())/data.std()
 data = pd.concat([y, data_std.iloc[:, 20:30]], axis = 1)
@@ -863,71 +782,62 @@ sns.violinplot(x='features',y='value',hue='diagnosis', data= data, split=True, i
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/45b083d89a90c155a07470c5db6f5e9d7f8f460b.png)
-:::
-:::
 
-::: {.cell .code execution_count="20"}
-``` python
+    
+![png](output_28_0.png)
+    
+
+
+
+```python
 sns.boxplot(x='features', y='value', hue='diagnosis', data=data)
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/db2ea207a56bcb069fcb80464b4cabbdd0691222.png)
-:::
-:::
 
-::: {.cell .markdown}
-:::
+    
+![png](output_29_0.png)
+    
 
-::: {.cell .markdown}
+
+ 
+
 ### Task 6: Using Joint Plots for Feature Comparison
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="21"}
-``` python
+```python
 sns.jointplot(x.loc[:, 'concavity_worst'],
             x.loc[:, 'concave points_worst'],
             kind='regg',
             color='#ce1414');
+
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/c8ae2132452fda72a923ae0f88de49c8d5c45b60.png)
-:::
-:::
 
-::: {.cell .code}
-``` python
+    
+![png](output_32_0.png)
+    
+
+
+
+```python
+
 ```
-:::
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
-:::
+ 
 
-::: {.cell .markdown}
 ### Task 7: Observing the Distribution of Values and their Variance with Swarm Plots
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="23"}
-``` python
+```python
 sns.set(style='whitegrid', palette='muted')
 data = x
 data_std = (data - data.mean())/data.std()
@@ -938,13 +848,14 @@ sns.swarmplot(x='features',y='value',hue='diagnosis', data= data)
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/9406b7334d109901279611757101a9067d8867a1.png)
-:::
-:::
 
-::: {.cell .code execution_count="24"}
-``` python
+    
+![png](output_37_0.png)
+    
+
+
+
+```python
 sns.set(style='whitegrid', palette='muted')
 data = x
 data_std = (data - data.mean())/data.std()
@@ -955,13 +866,14 @@ sns.swarmplot(x='features',y='value',hue='diagnosis', data= data)
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/e9cb2477cf5e43150bb6bd72daa2b65b4153054d.png)
-:::
-:::
 
-::: {.cell .code execution_count="26"}
-``` python
+    
+![png](output_38_0.png)
+    
+
+
+
+```python
 sns.set(style='whitegrid', palette='muted')
 data = x
 data_std = (data - data.mean())/data.std()
@@ -972,46 +884,42 @@ sns.swarmplot(x='features',y='value',hue='diagnosis', data= data)
 plt.xticks(rotation=45); 
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/be82c094bfa267e43a178e8e3bcf9ddee28a6d07.png)
-:::
-:::
 
-::: {.cell .markdown}
-:::
+    
+![png](output_39_0.png)
+    
 
-::: {.cell .markdown}
+
+ 
+
 ### Task 8: Observing all Pair-wise Correlations
+***
+Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
+***
 
-------------------------------------------------------------------------
 
-Note: If you are starting the notebook from this task, you can run cells
-from all the previous tasks in the kernel by going to the top menu and
-Kernel \> Restart and Run All \*\*\*
-:::
-
-::: {.cell .code execution_count="29"}
-``` python
+```python
 f, ax = plt.subplots(figsize=(18,18))
 sns.heatmap(x.corr(), annot=True, linewidth=.5, fmt='.1f', ax=ax);
 ```
 
-::: {.output .display_data}
-![](vertopal_103f7d03929c46dfa85ac0e2befb0a53/aebb95966d53b1f6baf620a62f1b08b385382b1d.png)
-:::
-:::
 
-::: {.cell .code}
-``` python
-```
-:::
+    
+![png](output_42_0.png)
+    
 
-::: {.cell .code}
-``` python
-```
-:::
 
-::: {.cell .code}
-``` python
+
+```python
+
 ```
-:::
+
+
+```python
+
+```
+
+
+```python
+
+```
