@@ -6,8 +6,6 @@
 
 The [Breast Cancer Diagnostic data](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29) is available on the UCI Machine Learning Repository. This database is also available through the [UW CS ftp server](http://ftp.cs.wisc.edu/math-prog/cpo-dataset/machine-learn/cancer/WDBC/).
 
-Features are computed from a digitized image of a fine needle aspirate (FNA) of a breast mass. They describe characteristics of the cell nuclei present in the image. n the 3-dimensional space is that described in: [K. P. Bennett and O. L. Mangasarian: "Robust Linear Programming Discrimination of Two Linearly Inseparable Sets", Optimization Methods and Software 1, 1992, 23-34].
-
 **Attribute Information**:
 
 - ID number
@@ -59,9 +57,7 @@ data = pd.read_csv('data/data.csv')
  
 
 ### Task 2: Separate Target from Features
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -441,9 +437,7 @@ x.head()
  
 
 ### Task 3: Plot Diagnosis Distributions
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -721,9 +715,7 @@ x.describe()
  
 
 ### Task 4: Visualizing Standardized Data with Seaborn
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -750,9 +742,7 @@ plt.xticks(rotation=45);
  
 
 ### Task 5: Violin Plots and Box Plots
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -803,9 +793,7 @@ plt.xticks(rotation=45);
  
 
 ### Task 6: Using Joint Plots for Feature Comparison
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -832,9 +820,7 @@ sns.jointplot(x.loc[:, 'concavity_worst'],
  
 
 ### Task 7: Observing the Distribution of Values and their Variance with Swarm Plots
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
@@ -893,9 +879,7 @@ plt.xticks(rotation=45);
  
 
 ### Task 8: Observing all Pair-wise Correlations
-***
-Note: If you are starting the notebook from this task, you can run cells from all the previous tasks in the kernel by going to the top menu and Kernel > Restart and Run All
-***
+
 
 
 ```python
